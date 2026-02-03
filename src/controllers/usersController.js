@@ -1,4 +1,4 @@
-import { getAllUser, getUserByMailAndPassword, userRegister } from "../repository/usersRepository.js"
+import { getAllUser, getUserByMail, userRegister } from "../repository/usersRepository.js"
 import bcrypt from "bcrypt"
 
 export async function RegisterUser(req, res) {
@@ -7,11 +7,13 @@ export async function RegisterUser(req, res) {
         const newUser = req.body
 
          await userRegister(newUser.lastname, newUser.firstname, newUser.mail, newUser.password)
-         if (newUser.mail) {
-            throw new Error("compte existant");
+         if (!newUser.mail) {
+            throw new Error("compte inexistant");
             
          }
+
         res.json(newUser)
+        
     } catch (error) {
         console.error(error)
         res.json({ ok: false })
@@ -19,21 +21,18 @@ export async function RegisterUser(req, res) {
 }
 export async function loginUser(req, res) {
     try {
-
-
         const { mail, password } = req.body
 
-        const userLogin = await getUserByMailAndPassword({ mail })
+        const userLogin = await getUserByMail({ mail })
 
         if (!userLogin) { 
-            throw new Error("mauvaise email");
-            
+            throw new Error("Erreur adresse e-mail");    
         }
       
         const passwordValide = await bcrypt.compare(password,userLogin.password)
 
         if (!passwordValide) {
-                 throw new Error("mauvaise mdp"); 
+                 throw new Error("Erreur mot de passe"); 
         }
 
         res.json({ok:true,
@@ -43,7 +42,6 @@ export async function loginUser(req, res) {
             firstname : userLogin.firstname
 
         })
-
 
     } catch (error) {
         console.error(error)

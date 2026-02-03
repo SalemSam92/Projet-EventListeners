@@ -16,14 +16,12 @@ export async function userRegister(lastname, firstname, mail, password) {
 
 
 
-export async function getUserByMailAndPassword({ mail}) {
+export async function getUserByMail({ mail}) {
     const userLogin = await User.findOne({mail})
 
     if (!userLogin) {
-        return null
+     throw new Error("Adresse mail introuvable");    
     }
-   
-   
     return userLogin
 
 } 
