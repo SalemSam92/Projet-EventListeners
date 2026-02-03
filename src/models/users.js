@@ -14,12 +14,16 @@ const user = mongoose.Schema({
 
     mail : {
         type : String,
-        required : [true, "E-mail obligatoire"]
+        required : [true, "E-mail obligatoire"],
+        unique : [true,"Adresse e-mail existante"]
     },
     password : {
         type : String,
         required : [true,"Mot de passe obligatoire"]
+    },
+    role : {
+        type : String
     }
 })
 
-export const User = mongoose.model("users",user)
+export const User = mongoose.model("users",user) 
