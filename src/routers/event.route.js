@@ -1,0 +1,20 @@
+console.log("event.routes.js chargé");
+
+import express from "express";
+import {
+  getAllOrSearch,
+  getById,
+  create,
+  update,
+  drop,
+} from "../controllers/eventsController.js";
+
+const eventRouter = express.Router();
+
+eventRouter.get("/", getAllOrSearch);
+eventRouter.get("/:id", getById);
+eventRouter.post("/", create);
+eventRouter.patch("/:id", update);
+eventRouter.delete("/:id", drop);
+
+export default eventRouter;
