@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventListener</title>
+    <script src="./js/detail.js" defer></script>
+  </head>
+  <body id="event-detail">
+    <section id="event-detail">
+      <h2>Détail de l'évènement</h2>
+      <h3 id="titre"></h3>
+      <p id="description"></p>
+      <p id="lieu"></p>
+      <p id="date"></p>
+      <p id="nbPlace"></p>
+
+      <button type="button" id="edit-btn">Modifier</button>
+      <button type="button" id="delete-btn">Supprimer</button>
+
+      <form id="edit-form" hidden>
+        <input type="text" id="edit-titre" />
+        <textarea id="edit-description"></textarea>
+        <input type="text" id="edit-lieu" />
+        <input type="date" id="edit-date" />
+        <input type="number" id="edit-nbPlace" />
+
+        <button type="submit">Enregistrer</button>
+        <button type="button" id="cancel-edit">Annuler</button>
+      </form>
+    </section>
+    <a href="./index.html">Retour à la page d'accueil</a>
+  </body>
+</html>
