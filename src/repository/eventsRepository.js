@@ -13,11 +13,7 @@ export async function getEventById(id) {
 }
 
 export async function updateById(id, data) {
-  return Events.findByIdAndUpdate(
-    id,
-    { $set: data },
-    { new: true, runValidators: true },
-  );
+  return Events.findByIdAndUpdate(id, data, { new: true, runValidators: true });
 }
 
 export async function deleteEvent(id) {

@@ -2,6 +2,8 @@ import {
   getEventById,
   getEvents,
   updateById,
+  createEvent,
+  deleteEvent,
 } from "../repository/eventsRepository.js";
 
 export async function getAllOrSearch(req, res) {
@@ -16,7 +18,7 @@ export async function getAllOrSearch(req, res) {
 //get
 export async function get(req, res) {
   try {
-    const events = await getEvents({}, { _id: 1, title: 1 });
+    const events = await getEvents({}, { _id: 1, titre: 1 });
     return res.json(events);
   } catch (err) {
     console.error(err);
@@ -43,7 +45,13 @@ export async function search(req, res) {
         $lt: new Date(date.getTime() + 24 * 60 * 60 * 1000),
       };
     }
-    const events = await getEvents(filter, { _id: 1, title: 1 });
+    const events = await getEvents(filter, {
+      _id: 1,
+      titre: 1,
+      lieu: 1,
+      date: 1,
+      nbPlace: 1,
+    });
     return res.json(events);
   } catch (err) {
     console.error(err);
@@ -82,7 +90,7 @@ export async function create(req, res) {
       ...req.body,
     };
 
-    await recipeRepository.createEvent(data);
+    await createEvent(data);
     return res.status(201).json({ ok: true });
   } catch (err) {
     console.error(err);
