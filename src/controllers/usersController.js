@@ -39,7 +39,8 @@ export async function loginUser(req, res) {
             message : "Connexion réussi",
             id : userLogin._id,
             mail : userLogin.mail,
-            firstname : userLogin.firstname
+            firstname : userLogin.firstname,
+            role : userLogin.role
 
         })
 

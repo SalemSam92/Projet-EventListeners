@@ -22,7 +22,8 @@ const user = mongoose.Schema({
         required : [true,"Mot de passe obligatoire"]
     },
     role : {
-        type : String
+        type : String,
+        default: "membre"
     }
 })
 
