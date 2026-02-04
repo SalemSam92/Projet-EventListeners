@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EventListener</title>
+  <script src="./js/index.js" defer></script>
+  <script src="./js/create.js" defer></script>
+  <script src="./js/list.js" defer></script>
+</head>
+
+<body>
+  <div class="message-welcome">
+
+  </div>
+
+  <h1>EventListener:</h1>
+  <section>
+    <h2>Créer un évènement</h2>
+    <form id="create-form">
+      <div>
+        <label for="titre">Titre de l'évènement</label>
+        <input type="text" name="titre" id="titre" />
+      </div>
+
+      <div>
+        <label for="description">Description</label>
+        <textarea name="description" id="description"></textarea>
+      </div>
+
+      <div>
+        <label for="lieu">Lieu de l'évènement</label>
+        <input type="text" name="lieu" id="lieu" />
+      </div>
+
+      <div>
+        <label for="date">Date de l'évènement</label>
+        <input type="date" name="date" id="date" />
+      </div>
+
+      <div>
+        <label for="nbPlace">Nombre maximal de places</label>
+        <input type="number" name="nbPlace" id="nbPlace" />
+      </div>
+
+      <button type="submit" id="addIngredient">+ Ajouter un évènement</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Rechercher un évènement</h2>
+
+    <form id="search-form">
+      <div>
+        <label for="search-titre">Titre</label>
+        <input type="text" id="search-titre" name="titre" />
+      </div>
+
+      <div>
+        <label for="search-lieu">Lieu</label>
+        <input type="text" id="search-lieu" name="lieu" />
+      </div>
+
+      <div>
+        <label for="search-date">Date</label>
+        <input type="date" id="search-date" name="date" />
+      </div>
+
+      <button type="submit">Rechercher</button>
+      <button type="button" id="reset-search">Réinitialiser</button>
+    </form>
+  </section>
+
+  <h2>Liste de tous les évènements</h2>
+  <ul id="eventwraper"></ul>
+
+  <script src="/scripts/dashBoard.js"></script>
+</body>
+
+</html>
