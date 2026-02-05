@@ -23,6 +23,6 @@ app.listen(process.env.PORT, (error) => {
   if (error) {
     console.error(error);
   } else {
-    console.log("Serveur demarrer");
+    console.log("Serveur demarrer",process.env.PORT);
   }
 });
