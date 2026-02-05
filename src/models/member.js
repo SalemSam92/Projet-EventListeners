@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const member = mongoose.Schema({
 
     lastname :{
@@ -24,7 +26,13 @@ const member = mongoose.Schema({
             type : String
         }
 
-    }
+    },
+    role: [{
+        type: String,
+        enum: ["user","admin"],
+        default: "user"    
+    }]
+
 })
 
 export const Member = mongoose.model("member",member)
