@@ -5,42 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Membre</title>
+    <script src="./js/memberView.js" defer></script>
 
-    <script src="./js/index.js" defer></script>
-    <script src="./js/create.js" defer></script>
-    <!-- <script src="./js/list.js" defer></script> -->
 </head>
 
 <body>
     <div class="message-welcome">
 
     </div>
-    <section>
-        <h2>Rechercher un évènement</h2>
-
-        <form id="search-form">
-            <div>
-                <label for="search-titre">Titre</label>
-                <input type="text" id="search-titre" name="titre" />
-            </div>
-
-            <div>
-                <label for="search-lieu">Lieu</label>
-                <input type="text" id="search-lieu" name="lieu" />
-            </div>
-
-            <div>
-                <label for="search-date">Date</label>
-                <input type="date" id="search-date" name="date" />
-            </div>
-
-            <button type="submit">Rechercher</button>
-            <button type="button" id="reset-search">Réinitialiser</button>
-        </form>
-    </section>
-
+    
     <h2>Liste de tous les évènements</h2>
-    <ul id="eventwraper"></ul>
+  <div id="eventwraper"></div>
+
 
     <script src="/scripts/dashBoard.js"></script>
 </body>
