@@ -1,5 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
+const userRole = sessionStorage.getItem("userRole")
 
 let currentEvent = null;
 
@@ -96,6 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    window.location.href = "index.html";
+    
+      window.location.href = "index.html";
+    
   });
 });

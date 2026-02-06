@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const events = mongoose.Schema({
+const eventsSchema = mongoose.Schema({
   titre: {
     type: String,
     required: [true, "Le titre de l'évenement est obligatoire"],
@@ -10,19 +10,20 @@ const events = mongoose.Schema({
   },
   lieu: {
     type: String,
-    required: [true, "le lieu doit être rensigné "],
+    required: [true, "le lieu doit être renseigné"],
   },
   date: {
     type: Date,
-    required: [true, "La date doit être reneignée"],
+    required: [true, "La date doit être renseignée"],
   },
   nbPlace: {
     type: Number,
     required: [true, "Le nombre maximal de places doit être renseigné"],
   },
-  participants : [{
-    type: mongoose.Schema.Types.ObjectId, 
-    ref : 'user'
+  participants: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user'
   }]
 });
-export const Events = mongoose.model("events", events);
+
+export const Events = mongoose.model("events", eventsSchema);
