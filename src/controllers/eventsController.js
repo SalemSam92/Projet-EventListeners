@@ -167,7 +167,7 @@ export async function inscrireevenement(req, res) {
     return res.status(404).json ({ok: false, error: "évènement introuvable"});
   }
   if (eventCheck.participants.length >= eventCheck.nbPlace) {
-    return res.stastus (400).json ({
+    return res.status (400).json ({
       ok: false,
       error : "désolé, il n'y a plus de places disponible"
     });

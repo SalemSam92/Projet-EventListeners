@@ -30,14 +30,14 @@ export async function unregisterMember (eventId, userId) {
     ),
     Member.findByIdAndUpdate(
       userId,
-      {$pull:{events: eventsID}}
+      {$pull:{events: eventId}}
     )
   ]);
   }
   // s'enregistrer à un évènement 
 
   export async function enregistrement(eventId, userId) {
-    await userId.findByIdAndUpdate(
+    await Member.findByIdAndUpdate(
       userId,
       {$addToSet: { Events : eventId}}
     );
