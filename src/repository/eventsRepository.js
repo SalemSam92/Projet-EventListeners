@@ -1,5 +1,5 @@
 import { Events } from "../models/events.js";
-import { Member } from "../models/member.js";
+import { User } from "../models/users.js";
 
 export async function getEvents(filter = {}, projection = null) {
   return Events.find(filter, projection);
@@ -28,18 +28,19 @@ export async function unregisterMember (eventId, userId) {
       {$pull : {participants : userId}},
       {new : true}
     ),
-    Member.findByIdAndUpdate(
+    User.findByIdAndUpdate(
       userId,
       {$pull:{events: eventId}}
     )
   ]);
+  return updatedEvent;
   }
   // s'enregistrer à un évènement 
 
   export async function enregistrement(eventId, userId) {
-    await Member.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       userId,
-      {$addToSet: { Events : eventId}}
+      {$addToSet: { events : eventId}}
     );
     return Events.findByIdAndUpdate(
       eventId,

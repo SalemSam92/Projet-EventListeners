@@ -195,7 +195,7 @@ export async function unregister (req, res) {
       if (!userId) {
         return res.status (400).json ({ok : false, error : "id user manquant"});
       }
-      if (!isSelf && !isAdmin){
+      if (!isSelf){
         return res.status(403).json ({
           ok:false,
           error: "Vous n'avez pas l'authorisation."
