@@ -167,7 +167,7 @@ export async function inscrireevenement(req, res) {
     return res.status(404).json ({ok: false, error: "évènement introuvable"});
   }
   if (eventCheck.participants.length >= eventCheck.nbPlace) {
-    return res.stastus (400).json ({
+    return res.status (400).json ({
       ok: false,
       error : "désolé, il n'y a plus de places disponible"
     });
@@ -195,7 +195,7 @@ export async function unregister (req, res) {
       if (!userId) {
         return res.status (400).json ({ok : false, error : "id user manquant"});
       }
-      if (!isSelf && !isAdmin){
+      if (!isSelf){
         return res.status(403).json ({
           ok:false,
           error: "Vous n'avez pas l'authorisation."
@@ -215,5 +215,3 @@ export async function unregister (req, res) {
       res.status (500).json({ ok: false, error: err.message });
     }
   }
-
-

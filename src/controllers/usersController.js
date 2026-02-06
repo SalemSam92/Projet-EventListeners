@@ -26,7 +26,7 @@ export async function loginUser(req, res) {
     try {
         const { mail, password } = req.body
 
-        const userLogin = await getUserByMail({ mail });
+        const userLogin = await getUserByMail({ mail })
 
         if (!userLogin) {
             throw new Error("Erreur adresse e-mail");
@@ -37,12 +37,16 @@ export async function loginUser(req, res) {
         if (!passwordValide) {
             throw new Error("Erreur mot de passe");
         }
-        res.json({ok:true,
-            message : "Connexion réussi",
-            id : userLogin._id,
-            mail : userLogin.mail,
-            firstname : userLogin.firstname,
-            role : userLogin.role
+
+
+        res.json({
+            ok: true,
+            message: "Connexion réussi",
+            id: userLogin._id,
+            mail: userLogin.mail,
+            firstname: userLogin.firstname,
+            role : userLogin.role || "user"
+
 
         });
 

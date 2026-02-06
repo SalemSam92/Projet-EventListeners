@@ -24,7 +24,12 @@ const user = mongoose.Schema({
     role : {
         type : String,
         default: "membre"
-    }
+    },
+    events : {
+        type : Array,
+        id_events:{
+            type : String
+        }}
 })
 
 export const User = mongoose.model("users",user) 
