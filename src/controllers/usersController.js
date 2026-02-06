@@ -3,20 +3,23 @@ import bcrypt from "bcrypt"
 
 export async function RegisterUser(req, res) {
     try {
+        const { lastname, firstname, mail, password } = req.body
 
-        const newUser = req.body
+        if (!mail || !password) {
+            return res.status(400).json({ ok: false, message: "Erreur enregistrment" });
+        }
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-         await userRegister(newUser.lastname, newUser.firstname, newUser.mail, newUser.password)
-         if (!newUser.mail) {
-            throw new Error("compte inexistant");
-            
-         }
-
-        res.json(newUser)
-        
+        const newUser = await userRegister(lastname, firstname, mail, hashedPassword);
+        return res.status(201).json({
+            ok: true, message: "compte créé",
+            user: { lastname, firstname, mail }
+        });
+    
     } catch (error) {
-        console.error(error)
-        res.json({ ok: false })
+        console.error("erreur d'enregistrement", error);
+        return res.status(500).json({ ok: false })
     }
 }
 export async function loginUser(req, res) {
@@ -25,24 +28,27 @@ export async function loginUser(req, res) {
 
         const userLogin = await getUserByMail({ mail })
 
-        if (!userLogin) { 
-            throw new Error("Erreur adresse e-mail");    
+        if (!userLogin) {
+            throw new Error("Erreur adresse e-mail");
         }
-      
-        const passwordValide = await bcrypt.compare(password,userLogin.password)
+
+        const passwordValide = await bcrypt.compare(password, userLogin.password)
 
         if (!passwordValide) {
-                 throw new Error("Erreur mot de passe"); 
+            throw new Error("Erreur mot de passe");
         }
 
-        res.json({ok:true,
-            message : "Connexion réussi",
-            id : userLogin._id,
-            mail : userLogin.mail,
-            firstname : userLogin.firstname,
-            role : userLogin.role
 
-        })
+        res.json({
+            ok: true,
+            message: "Connexion réussi",
+            id: userLogin._id,
+            mail: userLogin.mail,
+            firstname: userLogin.firstname,
+            role : userLogin.role || "user"
+
+
+        });
 
     } catch (error) {
         console.error(error)

@@ -1,11 +1,10 @@
 import { User } from "../models/users.js";
-import bcrypt from "bcrypt"
-
+//bycript retiré car deja présent
 
 
 export async function userRegister(lastname, firstname, mail, password) {
     try {
-        const passwordHash = await bcrypt.hash(password,10)
+        
         const user = new User({ lastname, firstname, mail, password :passwordHash })
         user.save()
     } catch (error) {

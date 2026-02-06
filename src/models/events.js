@@ -20,12 +20,11 @@ const events = mongoose.Schema({
     type: Number,
     required: [true, "Le nombre maximal de places doit être renseigné"],
   },
-  listeMembreInscrits : {
-        type : Array,
-        id_membre:{
-            type : String
-        }
 
-    }
+  participants : [{
+    type: mongoose.Schema.Types.ObjectId, 
+    ref : 'user'
+  }]
+
 });
 export const Events = mongoose.model("events", events);
