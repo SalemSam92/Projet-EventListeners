@@ -24,7 +24,7 @@ async function login(mail, password) {
         sessionStorage.setItem("userMail",data.mail)
         sessionStorage.setItem("userRole",data.role)
       //  window.location.href = "/html/dashBoard.html"
-      if (data.role == "admin"){
+      if (data.role === "admin"){
         window.location.href = "/FrontEventListener/index.html"
       }
       else {

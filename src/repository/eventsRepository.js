@@ -21,31 +21,57 @@ export async function deleteEvent(id) {
   return Events.findByIdAndDelete(id);
 }
 
-export async function unregisterMember (eventId, userId) {
+export async function unregisterMember(eventId, userId) {
   const [updatedEvent] = await Promise.all([
     Events.findByIdAndUpdate(
       eventId,
-      {$pull : {participants : userId}},
-      {new : true}
+      { $pull: { participants: userId } },
+      { new: true }
     ),
     User.findByIdAndUpdate(
       userId,
-      {$pull:{events: eventId}}
+      { $pull: { events: eventId } }
     )
   ]);
   return updatedEvent;
-  }
-  // s'enregistrer à un évènement 
+}
+// s'enregistrer à un évènement 
 
-  export async function enregistrement(eventId, userId) {
-    await User.findByIdAndUpdate(
-      userId,
-      {$addToSet: { events : eventId}}
-    );
-    return Events.findByIdAndUpdate(
-      eventId,
-      {$addToSet: {participants: userId}},
-      {new : true}
-    );
+export async function enregistrement(eventId, userId) {
+  await User.findByIdAndUpdate(
+    userId,
+    { $addToSet: { events: eventId } }
+  );
+  return Events.findByIdAndUpdate(
+    eventId,
+    { $addToSet: { participants: userId } },
+    { new: true }
+  );
+}
+
+// on permet à l'admin de voir la liste des participants
+
+export const getEventBParticipants =  async (eventId) => {
+  try {
+    return await Events.findById(eventId).populate ({
+      path: 'participants',
+      select: 'lastname firstname mail'
+    });
+     
+  }catch (error){
+    throw new Error ("Erreur lors de la lrécupération de la liste");
   }
-  
+}
+
+// POUR TON DASHBOARD ADMIN (Récupérer TOUS les événements)
+export const getEvents = async (filter, projection) => {
+  try {
+    // On applique le filtre, la projection, et on POPULATE pour avoir les noms
+    return await Events.find(filter, projection).populate({
+        path: 'participants',
+        select: 'lastname firstname mail'
+    });
+  } catch (error) {
+    throw new Error("Erreur lors de la récupération des événements");
+  }
+};

@@ -21,7 +21,7 @@ export async function getAllOrSearch(req, res) {
 //get
 export async function get(req, res) {
   try {
-    const events = await getEvents({}, { _id: 1, titre: 1 });
+    const events = await getEvents({}, { _id: 1, titre: 1 ,participants: 1});
     return res.json(events);
   } catch (err) {
     console.error(err);
@@ -54,6 +54,7 @@ export async function search(req, res) {
       lieu: 1,
       date: 1,
       nbPlace: 1,
+      participants: 1,
     });
     return res.json(events);
   } catch (err) {
@@ -215,3 +216,18 @@ export async function unregister (req, res) {
       res.status (500).json({ ok: false, error: err.message });
     }
   }
+  // on permet à l'admin de voir la liste des participants
+
+ export const getDetailEventForAdmin = async (req, res) => {
+  try {
+    const event = await eventRepo.getEventWithParticipants(req.params.id);
+    
+    if (!event) {
+      return res.status(404).json({ message: "Événement non trouvé" });
+    }
+
+    res.status(200).json(event);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}

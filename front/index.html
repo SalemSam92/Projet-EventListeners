@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire d'inscription</title>
     <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
 </head>
 
 <body>
 
-    <section>
+    <section id="inscription-section">
         <h1>Inscription</h1>
 
         <div class="form-container">
@@ -19,13 +20,39 @@
                 <input type="text" name="firstname" id="firstname" placeholder="Prénom">
                 <input type="email" name="mail" id="mail" placeholder="mail">
                 <input type="password" name="password" id="password" placeholder="mot de passe">
-            
+
                 <button type="submit">s'inscrire</button>
             </form>
             <a href="/html/login.html">Vous êtes inscrits? accéder à votre compte</a>
         </div>
     </section>
+    <section id="admin-section" class="hidden">
+        <header class="admin-header">
+            <h1 class="message-bienvenue"></h1>
+            <button onclick="logout()" class="btn-logout">Déconnexion</button>
+        </header>
+        <main class="admin-content">
+            <div id="container-evenements">
+
+            </div>
+        </main>
+    </section>
+
     <script src="scripts/script.js"></script>
+    <script src="/scripts/dashboard.js"></script>
+   <script>
+        function logout() {
+            sessionStorage.clear();
+            window.location.reload();
+        }
+
+        window.onload = () => {
+            if (sessionStorage.getItem("userRole") === "admin") {
+                document.getElementById("register-section").classList.add("hidden");
+                document.getElementById("admin-section").classList.remove("hidden");
+            }
+        }
+    </script>
 </body>
 
 </html>
