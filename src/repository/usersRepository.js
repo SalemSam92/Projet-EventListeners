@@ -5,7 +5,7 @@ import { User } from "../models/users.js";
 export async function userRegister(lastname, firstname, mail, password) {
     try {
         
-        const user = new User({ lastname, firstname, mail, password :passwordHash })
+        const user = new User({ lastname, firstname, mail, password })
         user.save()
     } catch (error) {
         console.error(error)

@@ -25,7 +25,7 @@ export async function unregisterMember (eventId, userId) {
   const [updatedEvent] = await Promise.all([
     Events.findByIdAndUpdate(
       eventId,
-      {$pull : {participants : userId}},
+      {$pull : {participants : userId},$inc: { nbPlace: +1 }},
       {new : true}
     ),
     User.findByIdAndUpdate(
@@ -44,7 +44,7 @@ export async function unregisterMember (eventId, userId) {
     );
     return Events.findByIdAndUpdate(
       eventId,
-      {$addToSet: {participants: userId}},
+      {$addToSet: {participants: userId},$inc: { nbPlace: -1 }},
       {new : true}
     );
   }

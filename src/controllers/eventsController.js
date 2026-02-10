@@ -82,10 +82,10 @@ export async function getById(req, res) {
 }
 
 export async function create(req, res) {
-  const  {userRole, data } = req.body;
-  if (userRole !== "admin") {
-    return res.status(403).json ({ok: false, error: "action réservée aux admin"});
-  }
+  const  {data } = req.body;
+  // if (userRole !== "admin") {
+  //   return res.status(403).json ({ok: false, error: "action réservée aux admin"});
+  // }
   try {
     req.body.titre = String(req.body.titre);
     req.body.description = String(req.body.description);
@@ -106,11 +106,12 @@ export async function create(req, res) {
 }
 
 export async function update(req, res) {
-  const { id } = req.params;
-  const {userRole, data} = req.body;
-   if (userRole !== "admin") {
-    return res.status(403).json ({ok: false, error: "action reservée aux admins"});
-   }
+  const {id} = req.params;
+  const {data} = req.body;
+ 
+  //  if (userRole !== "admin") {
+  //   return res.status(403).json ({ok: false, error: "action reservée aux admins"});
+  //  }
   try {
     const event = await updateById(id, data);
 
@@ -130,13 +131,13 @@ export async function update(req, res) {
 export async function drop(req, res) {
   const { id } = req.params;
   
-  const {userRole} = req.body;
-  if (userRole !== "admin") {
-    return res.status(403).json({
-      ok: false,
-      error: "Action interdite"
-    });
-  }
+  //const {userRole} = req.body;
+  //if (userRole !== "admin") {
+    // return res.status(403).json({
+    //   ok: false,
+    //   error: "Action interdite"
+    // });
+  //}
   try {
     const event = await deleteEvent(id);
     if (!event) {

@@ -9,7 +9,7 @@ createForm.addEventListener("submit", async (event) => {
     description: document.getElementById("description").value,
     lieu: document.getElementById("lieu").value,
     date: document.getElementById("date").value, // YYYY-MM-DD
-    nbPlace: Number(document.getElementById("nbPlace").value),
+    nbPlace: Number(document.getElementById("nbPlace").value)
   };
 
   try {

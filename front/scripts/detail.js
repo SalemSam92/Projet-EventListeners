@@ -5,7 +5,7 @@ const userRole = sessionStorage.getItem("userRole")
 let currentEvent = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (document.body.id !== "event-detail") return;
+  if (document.body.id !== "event-details") return;
 
   const editBtn = document.getElementById("edit-btn");
   const editForm = document.getElementById("edit-form");
@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     location.reload();
   });
 
+
   // Bouton supprimer
   deleteBtn.addEventListener("click", async () => {
     if (!confirm("Supprimer cet évènement ?")) return;
@@ -98,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     
-      window.location.href = "index.html";
+      window.location.href = "../html/adminView.html";
     
   });
 });
